@@ -53,7 +53,7 @@
     <input type="text" name="area" placeholder="Área" required <%= cotizacionBloqueada ? "disabled" : "" %> />
     <select name="idEmpleado" required <%= cotizacionBloqueada ? "disabled" : "" %>>
         <option value="">Seleccione un empleado</option>
-        <% 
+        <%
             java.util.List<com.example.catedrapoo.model.Trabajador> empleados = (java.util.List<com.example.catedrapoo.model.Trabajador>) request.getAttribute("empleados");
             if (empleados != null) for (com.example.catedrapoo.model.Trabajador emp : empleados) { %>
             <option value="<%= emp.getId() %>"><%= emp.getNombre() %></option>

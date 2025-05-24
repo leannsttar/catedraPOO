@@ -10,7 +10,7 @@
     com.example.catedrapoo.model.Usuario usuario = (com.example.catedrapoo.model.Usuario) session.getAttribute("usuario");
     java.util.List<com.example.catedrapoo.model.Cotizacion> cotizaciones = (java.util.List<com.example.catedrapoo.model.Cotizacion>) request.getAttribute("cotizaciones");
     Map<Integer, String> clienteMap = (Map<Integer, String>) request.getAttribute("clienteMap");
-    Map<Integer, List<com.example.catedrapoo.model.Asignacion>> asignacionesPorCotizacion = 
+    Map<Integer, List<com.example.catedrapoo.model.Asignacion>> asignacionesPorCotizacion =
         (Map<Integer, List<com.example.catedrapoo.model.Asignacion>>) request.getAttribute("asignacionesPorCotizacion");
     if (asignacionesPorCotizacion == null) {
         asignacionesPorCotizacion = new HashMap<>();
