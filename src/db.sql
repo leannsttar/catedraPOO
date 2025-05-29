@@ -50,6 +50,7 @@ CREATE TABLE COTIZACION (
     ID_Cotizacion INT AUTO_INCREMENT PRIMARY KEY,
     ID_Cliente INT,
     ID_Empleado_Elabora INT,
+    Titulo_Cotizacion VARCHAR(255), -- Campo agregado para el título
     Fecha_Creacion_Cotizacion DATETIME DEFAULT CURRENT_TIMESTAMP,
     Fecha_Tentativa_Inicio DATETIME,
     Fecha_Tentativa_Fin DATETIME,
@@ -59,8 +60,9 @@ CREATE TABLE COTIZACION (
     Total_Cotizacion DECIMAL(10,2),
     Estado_Cotizacion VARCHAR(50),
     FOREIGN KEY (ID_Cliente) REFERENCES CLIENTE(ID_Cliente),
-    FOREIGN KEY (ID_Empleado_Elabora) REFERENCES USUARIO(ID_Usuario) -- Aquí el cambio
+    FOREIGN KEY (ID_Empleado_Elabora) REFERENCES USUARIO(ID_Usuario)
 );
+
 -- Tabla ASIGNACION_ACTIVIDAD
 CREATE TABLE ASIGNACION_ACTIVIDAD (
     ID_Asignacion INT AUTO_INCREMENT PRIMARY KEY,
@@ -117,10 +119,16 @@ VALUES
 -- Insertar COTIZACIONES (ajustadas para que los totales sean coherentes)
 -- Costo_De_Asignaciones = 1730.00, Costos_Adicionales = 270.00 → Total = 2000.00
 -- Costo_De_Asignaciones = 360.00, Costos_Adicionales = 140.00 → Total = 500.00
-INSERT INTO COTIZACION (ID_Cliente, ID_Empleado_Elabora, Fecha_Tentativa_Inicio, Fecha_Tentativa_Fin, Cantidad_Horas_Del_Proyecto, Costo_De_Asignaciones, Costos_Adicionales, Total_Cotizacion, Estado_Cotizacion)
+INSERT INTO COTIZACION (
+    ID_Cliente, ID_Empleado_Elabora, Titulo_Cotizacion,
+    Fecha_Tentativa_Inicio, Fecha_Tentativa_Fin,
+    Cantidad_Horas_Del_Proyecto, Costo_De_Asignaciones,
+    Costos_Adicionales, Total_Cotizacion, Estado_Cotizacion
+)
 VALUES
-(1, 1, DATE_ADD(NOW(), INTERVAL 7 DAY), DATE_ADD(NOW(), INTERVAL 30 DAY), 120.00, 1730.00, 270.00, 2000.00, 'En proceso'),
-(2, 2, DATE_ADD(NOW(), INTERVAL 3 DAY), DATE_ADD(NOW(), INTERVAL 15 DAY), 80.00, 360.00, 140.00, 500.00, 'Finalizada');
+(1, 1, 'Desarrollo de sitio web', DATE_ADD(NOW(), INTERVAL 7 DAY), DATE_ADD(NOW(), INTERVAL 30 DAY), 120.00, 1730.00, 270.00, 2000.00, 'En proceso'),
+(2, 2, 'Aplicación móvil de inventario', DATE_ADD(NOW(), INTERVAL 3 DAY), DATE_ADD(NOW(), INTERVAL 15 DAY), 80.00, 360.00, 140.00, 500.00, 'Finalizada');
+
 
 -- Insertar ASIGNACIONES (sumas: cotización 1 = 1100 + 630 = 1730)
 INSERT INTO ASIGNACION_ACTIVIDAD (ID_Cotizacion, ID_Empleado_Asignado, Titulo_Actividad, Area_Asignada, Costo_Por_Hora, Fecha_Hora_Inicio, Fecha_Hora_Fin, Cantidad_Horas_Aproximadas, Incremento_Extra_Porcentaje, Costo_Base, Total_Asignacion)

@@ -15,21 +15,22 @@ public class CotizacionDAO {
 
     public void crear(Cotizacion cotizacion) throws SQLException {
         // Guardar el ID del usuario logeado en el campo ID_Empleado_Elabora (aunque sea un usuario, no un empleado)
-        String sql = "INSERT INTO COTIZACION (Estado_Cotizacion, Fecha_Tentativa_Fin, Fecha_Tentativa_Inicio, Cantidad_Horas_Del_Proyecto, Costo_De_Asignaciones, Costos_Adicionales, Total_Cotizacion, ID_Cliente, ID_Empleado_Elabora) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO COTIZACION (Estado_Cotizacion, Titulo_Cotizacion, Fecha_Tentativa_Fin, Fecha_Tentativa_Inicio, Cantidad_Horas_Del_Proyecto, Costo_De_Asignaciones, Costos_Adicionales, Total_Cotizacion, ID_Cliente, ID_Empleado_Elabora) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, cotizacion.getEstado());
-            stmt.setTimestamp(2, cotizacion.getFechaFin() != null ? Timestamp.valueOf(cotizacion.getFechaFin()) : null);
-            stmt.setTimestamp(3, cotizacion.getFechaInicio() != null ? Timestamp.valueOf(cotizacion.getFechaInicio()) : null);
-            stmt.setInt(4, cotizacion.getCantidadHorasTotales());
-            stmt.setDouble(5, cotizacion.getCostoAsignaciones());
-            stmt.setDouble(6, cotizacion.getCostosAdicionales());
-            stmt.setDouble(7, cotizacion.getTotalCotizacion());
-            stmt.setInt(8, cotizacion.getIdCliente());
+            stmt.setString(2, cotizacion.getTituloCotizacion());
+            stmt.setTimestamp(3, cotizacion.getFechaFin() != null ? Timestamp.valueOf(cotizacion.getFechaFin()) : null);
+            stmt.setTimestamp(4, cotizacion.getFechaInicio() != null ? Timestamp.valueOf(cotizacion.getFechaInicio()) : null);
+            stmt.setInt(5, cotizacion.getCantidadHorasTotales());
+            stmt.setDouble(6, cotizacion.getCostoAsignaciones());
+            stmt.setDouble(7, cotizacion.getCostosAdicionales());
+            stmt.setDouble(8, cotizacion.getTotalCotizacion());
+            stmt.setInt(9, cotizacion.getIdCliente());
             // Aquí se guarda el ID del usuario logeado (de la tabla USUARIO)
             if (cotizacion.getIdEmpleadoElabora() != null) {
-                stmt.setInt(9, cotizacion.getIdEmpleadoElabora());
+                stmt.setInt(10, cotizacion.getIdEmpleadoElabora());
             } else {
-                stmt.setNull(9, java.sql.Types.INTEGER);
+                stmt.setNull(10, java.sql.Types.INTEGER);
             }
             stmt.executeUpdate();
         }
@@ -60,16 +61,17 @@ public class CotizacionDAO {
     }
 
     public void actualizar(Cotizacion cotizacion) throws SQLException {
-        String sql = "UPDATE COTIZACION SET Estado_Cotizacion=?, Fecha_Tentativa_Fin=?, Fecha_Tentativa_Inicio=?, Cantidad_Horas_Del_Proyecto=?, Costo_De_Asignaciones=?, Costos_Adicionales=?, Total_Cotizacion=? WHERE ID_Cotizacion=?";
+        String sql = "UPDATE COTIZACION SET Estado_Cotizacion=?, Titulo_Cotizacion=?, Fecha_Tentativa_Fin=?, Fecha_Tentativa_Inicio=?, Cantidad_Horas_Del_Proyecto=?, Costo_De_Asignaciones=?, Costos_Adicionales=?, Total_Cotizacion=? WHERE ID_Cotizacion=?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, cotizacion.getEstado());
-            stmt.setTimestamp(2, cotizacion.getFechaFin() != null ? Timestamp.valueOf(cotizacion.getFechaFin()) : null);
-            stmt.setTimestamp(3, cotizacion.getFechaInicio() != null ? Timestamp.valueOf(cotizacion.getFechaInicio()) : null);
-            stmt.setInt(4, cotizacion.getCantidadHorasTotales());
-            stmt.setDouble(5, cotizacion.getCostoAsignaciones());
-            stmt.setDouble(6, cotizacion.getCostosAdicionales());
-            stmt.setDouble(7, cotizacion.getTotalCotizacion());
-            stmt.setInt(8, cotizacion.getId());
+            stmt.setString(2, cotizacion.getTituloCotizacion());
+            stmt.setTimestamp(3, cotizacion.getFechaFin() != null ? Timestamp.valueOf(cotizacion.getFechaFin()) : null);
+            stmt.setTimestamp(4, cotizacion.getFechaInicio() != null ? Timestamp.valueOf(cotizacion.getFechaInicio()) : null);
+            stmt.setInt(5, cotizacion.getCantidadHorasTotales());
+            stmt.setDouble(6, cotizacion.getCostoAsignaciones());
+            stmt.setDouble(7, cotizacion.getCostosAdicionales());
+            stmt.setDouble(8, cotizacion.getTotalCotizacion());
+            stmt.setInt(9, cotizacion.getId());
             stmt.executeUpdate();
         }
     }
@@ -143,16 +145,17 @@ public class CotizacionDAO {
     }
 
     private Cotizacion mapRow(ResultSet rs) throws SQLException {
-        return new Cotizacion(
-            rs.getInt("ID_Cotizacion"),
-            rs.getString("Estado_Cotizacion"),
-            rs.getTimestamp("Fecha_Tentativa_Fin") != null ? rs.getTimestamp("Fecha_Tentativa_Fin").toLocalDateTime() : null,
-            rs.getTimestamp("Fecha_Tentativa_Inicio") != null ? rs.getTimestamp("Fecha_Tentativa_Inicio").toLocalDateTime() : null,
-            rs.getInt("Cantidad_Horas_Del_Proyecto"),
-            rs.getDouble("Costo_De_Asignaciones"),
-            rs.getDouble("Costos_Adicionales"),
-            rs.getDouble("Total_Cotizacion"),
-            rs.getObject("ID_Cliente") != null ? rs.getInt("ID_Cliente") : null
-        );
+        Cotizacion cotizacion = new Cotizacion();
+        cotizacion.setId(rs.getInt("ID_Cotizacion"));
+        cotizacion.setTituloCotizacion(rs.getString("Titulo_Cotizacion"));
+        cotizacion.setEstado(rs.getString("Estado_Cotizacion"));
+        cotizacion.setFechaFin(rs.getTimestamp("Fecha_Tentativa_Fin") != null ? rs.getTimestamp("Fecha_Tentativa_Fin").toLocalDateTime() : null);
+        cotizacion.setFechaInicio(rs.getTimestamp("Fecha_Tentativa_Inicio") != null ? rs.getTimestamp("Fecha_Tentativa_Inicio").toLocalDateTime() : null);
+        cotizacion.setCantidadHorasTotales(rs.getInt("Cantidad_Horas_Del_Proyecto"));
+        cotizacion.setCostoAsignaciones(rs.getDouble("Costo_De_Asignaciones"));
+        cotizacion.setCostosAdicionales(rs.getDouble("Costos_Adicionales"));
+        cotizacion.setTotalCotizacion(rs.getDouble("Total_Cotizacion"));
+        cotizacion.setIdCliente(rs.getObject("ID_Cliente") != null ? rs.getInt("ID_Cliente") : null);
+        return cotizacion;
     }
 }

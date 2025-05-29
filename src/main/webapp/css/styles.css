@@ -1,0 +1,435 @@
+:root {
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --background: #f8fafc;
+  --text: #1e293b;
+  --text-light: #64748b;
+  --border: #e2e8f0;
+  --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  margin: 0;
+  padding: 2rem;
+  background: var(--background);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h2,
+h3,
+h4 {
+  color: var(--primary-color);
+  margin: 1.5rem 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 1.5rem 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+th,
+td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  background: #f1f5f9;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+tr:hover {
+  background: #f8fafc;
+}
+
+form {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  margin: 1.5rem 0;
+}
+
+input,
+select {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.btn {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.btn[disabled] {
+  background: var(--text-light);
+  cursor: not-allowed;
+}
+
+.userbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  margin-bottom: 2rem;
+}
+
+.userbar a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.error {
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 1rem;
+  border-radius: 6px;
+  margin: 1rem 0;
+}
+
+.success {
+  background: #dcfce7;
+  border: 1px solid #bbf7d0;
+  color: #16a34a;
+  padding: 1rem;
+  border-radius: 6px;
+  margin: 1rem 0;
+}
+
+/* Estilos para index.jsp */
+.container h1 {
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+.container ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.container ul li {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.container ul li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.container ul li a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.container ul li .desc {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.container hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+}
+
+.container p {
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* Navbar Styles */
+.navbar {
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-brand a {
+    color: var(--primary-color);
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.navbar-menu {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.nav-item {
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-item:hover, .nav-item.active {
+    color: var(--primary-color);
+    background: rgba(37, 99, 235, 0.1);
+}
+
+.navbar-end {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-info {
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logout {
+    color: #dc2626;
+}
+
+.logout:hover {
+    background: rgba(220, 38, 38, 0.1);
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+
+  input,
+  select,
+  .btn {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+
+  th,
+  td {
+    padding: 0.75rem;
+  }
+
+  .navbar {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    
+    .navbar-menu {
+        margin: 1rem 0;
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .navbar-end {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .container h1 {
+        font-size: 2rem;
+    }
+    
+    .container ul {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Ajustes para la columna de acciones en las tablas */
+td:last-child {
+    min-width: 280px;
+    white-space: nowrap;
+}
+
+td:last-child form {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 8px;
+}
+
+td:last-child select {
+    width: auto;
+    min-width: 120px;
+}
+
+td:last-child .btn {
+    margin: 0;
+}
+
+.activities-table {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.activities-table table {
+    min-width: 100%;
+    margin: 1rem 0;
+}
+
+.activities-table td, 
+.activities-table th {
+    min-width: 120px;
+    max-width: 200px;
+    padding: 12px;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+/* Columnas específicas */
+.activities-table .title-column {
+    min-width: 150px;
+}
+
+.activities-table .area-column {
+    min-width: 120px;
+}
+
+.activities-table .date-column {
+    min-width: 140px;
+}
+
+.activities-table .number-column {
+    min-width: 100px;
+}
+
+.activities-table .actions-column {
+    min-width: 160px;
+    width: auto;
+}
+
+/* Contenedores para secciones */
+.section-container {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+    .activities-table {
+        margin: 0 -1rem;
+        padding: 0 1rem;
+    }
+    
+    .section-container {
+        padding: 1rem;
+    }
+}
+
+/* Estilos para las subtareas */
+.subtasks-row {
+    background: #f8fafc;
+}
+
+.subtasks-container {
+    padding: 1rem;
+    margin: 0.5rem 0;
+}
+
+.subtasks-container h4 {
+    margin: 0.5rem 0;
+    color: var(--text);
+    font-size: 1rem;
+}
+
+.subtasks-table {
+    width: 100%;
+    margin: 0.5rem 0;
+    box-shadow: none;
+}
+
+.subtasks-table th,
+.subtasks-table td {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.subtask-form {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    background: transparent;
+    box-shadow: none;
+    margin: 0;
+}
+
+.subtask-form input {
+    flex: 1;
+}
+
+.subtask-form button {
+    white-space: nowrap;
+}

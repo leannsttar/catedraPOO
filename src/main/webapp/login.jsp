@@ -2,15 +2,8 @@
 <html>
 <head>
     <title>Iniciar Sesión</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 2em; }
-        .login-box { max-width: 350px; margin: 5em auto; border: 1px solid #ccc; padding: 2em; border-radius: 8px; background: #fafbfc; }
-        h2 { color: #007bff; text-align: center; }
-        input { width: 100%; padding: 8px; margin: 8px 0; box-sizing: border-box; }
-        .btn { width: 100%; background: #007bff; color: #fff; border: none; padding: 10px; cursor: pointer; border-radius: 4px; }
-        .btn:hover { background: #0056b3; }
-        .error { color: #c00; text-align: center; }
-    </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styles.css">
 </head>
 <body>
 <div class="login-box">

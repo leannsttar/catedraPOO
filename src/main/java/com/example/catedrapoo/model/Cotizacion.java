@@ -15,6 +15,7 @@ public class Cotizacion {
     private Integer idCliente;
     private List<CostoAdicional> costosAdicionalesList;
     private Integer idEmpleadoElabora;
+    private String tituloCotizacion;
 
     public Cotizacion() {
     }
@@ -128,6 +129,14 @@ public class Cotizacion {
 
     public void setIdEmpleadoElabora(Integer idEmpleadoElabora) {
         this.idEmpleadoElabora = idEmpleadoElabora;
+    }
+
+    public String getTituloCotizacion() {
+        return tituloCotizacion;
+    }
+
+    public void setTituloCotizacion(String tituloCotizacion) {
+        this.tituloCotizacion = tituloCotizacion;
     }
 
     public void calcularCostoTotal() {

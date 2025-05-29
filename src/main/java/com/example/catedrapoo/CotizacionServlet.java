@@ -70,12 +70,12 @@ public class CotizacionServlet extends HttpServlet {
             }
             Cotizacion cotizacion = new Cotizacion();
             cotizacion.setEstado(req.getParameter("estado"));
+            cotizacion.setTituloCotizacion(req.getParameter("titulo"));
+            
             // Obtener el usuario logeado y setear como ID_Empleado_Elabora
             com.example.catedrapoo.model.Usuario usuario = (com.example.catedrapoo.model.Usuario) req.getSession().getAttribute("usuario");
             if (usuario != null) {
                 cotizacion.setIdEmpleadoElabora(usuario.getId());
-            } else {
-                cotizacion.setIdEmpleadoElabora(null);
             }
             cotizacion.setIdCliente(Integer.parseInt(req.getParameter("clienteId")));
             cotizacion.setCantidadHorasTotales(0);
